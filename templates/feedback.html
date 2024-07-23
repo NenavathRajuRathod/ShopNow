@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feedback Form</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #2c3e50; /* Dark Background Color */
+            color: #ffffff; /* Text Color */
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .feedback-container {
+            background-color: #34495e; /* Darker Background Color */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 500px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .feedback-container h2 {
+            color: #3498db; /* Highlight Color */
+        }
+
+        .feedback-form {
+            margin-top: 20px;
+        }
+
+        .feedback-form label {
+            display: block;
+            margin: 15px 0 5px;
+            font-weight: bold;
+        }
+
+        .feedback-form input[type="number"],
+        .feedback-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ecf0f1; /* White Border */
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+            color: #333333; /* Dark Text Color */
+            background-color: #ffffff; /* White Background Color */
+        }
+
+        .feedback-form textarea {
+            height: 120px;
+            resize: none;
+        }
+
+        .feedback-form button {
+            background-color: #3498db; /* Highlight Color */
+            color: #ffffff;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .feedback-form button:hover {
+            background-color: #2980b9; /* Darker Highlight Color on Hover */
+        }
+
+        .thank-you-message {
+            display: none;
+            margin-top: 20px;
+            color: #2ecc71; /* Success Color */
+            font-weight: bold;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="feedback-container">
+    <h2>Leave Your Feedback</h2>
+    <div class="feedback-form">
+        <form id="feedbackForm" action="{% url 'feedback' id %}" method="POST">
+            {% csrf_token %}
+            <label for="rating">Rate your experience:</label>
+            <input type="number" id="rating" name="rate" min="1" max="5" required>
+
+            <label for="description">Feedback:</label>
+            <textarea id="description" name="desc" required></textarea>
+
+            <button type="submit">Submit Feedback</button>
+            {% csrf_token %}
+        </form>
+    </div>
+
+    <div id="thankYouMessage" class="thank-you-message">Thank you for your valuable feedback!</div>
+</div>
+
+
+</body>
+</html>

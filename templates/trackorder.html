@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Track Your Order</title>
+    <!-- Bootstrap CSS link (You may need to adjust the path based on your project structure) -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .progress-bar-stage {
+            text-align: left;
+            padding: 8px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Track Your Order</h2>
+
+        <!-- Bootstrap Vertical Progress Bar using Bootstrap Grid System -->
+        <div class="row mt-4">
+            {% if order.stage == -1 %}
+            <div class="col-md-3">
+                <div class="progress-bar-stage {% if order.stage == -1 %}font-weight-bold{% endif %}">
+                    
+                    <p>Your order {% if order.stage == -1 %}is cancelled{% endif %}</p>
+                </div>
+                <div class="progress" role="progressbar" aria-label="Default striped example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar progress-bar-striped" style="width: 10%"></div>
+                </div>
+            </div>
+            {% elif order.stage == 1 %}
+            <div class="col-md-3">
+                <div class="progress-bar-stage {% if order.stage == 1 %}font-weight-bold{% endif %}">
+                    
+                    <p>Your order {% if order.stage == 1 %}is just placed{% else %}not yet reached{% endif %}</p>
+                </div>
+                <div class="progress" role="progressbar" aria-label="Default striped example" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar progress-bar-striped" style="width: 10%"></div>
+                </div>
+            </div>
+
+            {% elif order.stage == 2 %}
+            <div class="col-md-3">
+                <div class="progress-bar-stage {% if order.stage == 2 %}font-weight-bold{% endif %}">
+                   
+                    <p>Your order {% if order.stage == 2 %}is shipped{% else %}not yet shipped{% endif %}</p>
+                </div>
+                    
+                <div class="progress" role="progressbar" aria-label="Info striped example" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar progress-bar-striped bg-info" style="width: 50%"></div>
+                 </div>
+            </div>
+            
+            {% elif order.stage == 3 %}
+            <div class="col-md-3">
+                <div class="progress-bar-stage {% if order.stage == 3 %}font-weight-bold{% endif %}">
+                    
+                    <p>Your order {% if order.stage == 3 %}reached your nearby merchant{% else %}not yet reached{% endif %}</p>
+                </div>
+                <div class="progress" role="progressbar" aria-label="Warning striped example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar progress-bar-striped bg-warning" style="width: 75%"></div>
+                  </div>
+            </div>
+            {% elif order.stage == 4 %}
+            <div class="col-md-3">
+                <div class="progress-bar-stage {% if order.stage == 4 %}font-weight-bold{% endif %}">
+                    
+                    <p>Your order {% if order.stage == 4 %}is delivered{% else %}not yet delivered{% endif %}</p>
+                </div>
+                <div class="progress" role="progressbar" aria-label="Danger striped example" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-bar progress-bar-striped bg-danger" style="width: 100%"></div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Bootstrap JS and Popper.js -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

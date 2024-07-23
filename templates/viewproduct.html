@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.product_name }} - View Product</title>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: grey; /* Dark black background color */
+            color: #ecf0f1; /* Light text color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full viewport height */
+            overflow: hidden; /* Hide overflow to prevent scrolling */
+        }
+
+        .container {
+            width: 70%;
+            max-width: 800px; /* Set a maximum width */
+            background-color: #1a1a1a; /* Dark background color for container */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            border-radius: 8px; /* Rounded corners */
+        }
+
+        .product-card {
+            display: flex;
+            flex-direction: column; /* Adjusted to column layout */
+        }
+
+        .product-image {
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-image img {
+            width: 100%;
+            max-height: 400px; /* Set a maximum height for the image */
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        h1, h2, p {
+            margin: 0;
+        }
+
+        h1 {
+            color: #ecf0f1; /* Light text color */
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            color: #bdc3c7; /* Light text color */
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+
+        p {
+            color: #bdc3c7; /* Light text color */
+            font-size: 16px;
+            line-height: 1.5;
+        }
+
+        .info-item {
+            margin-bottom: 15px;
+        }
+
+        .info-label {
+            font-weight: bold;
+            color: #ecf0f1; /* Light text color */
+            margin-right: 10px;
+        }
+
+        .wishlist-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 5px;
+            background-color: #008000; /* Green background color for wishlist */
+            color: #ecf0f1; /* Light text color */
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+        .wishlist-icon {
+            font-size: 32px;
+            cursor: pointer;
+            margin-right: 10px;
+            color: {% if boolean %}red{% else %}white{% endif %}; /* Change color based on boolean value */
+        }
+
+        .wishlist-container a {
+            text-decoration: none;
+            color: #ecf0f1; /* Light text color */
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+ 
+    <div class="product-card">
+        <div class="product-image">
+            <img src="{{ product.image.url }}" alt="{{ product.product_name }}">
+        </div>
+        <div class="product-info">
+            <h1>{{ product.product_name }}</h1>
+            <div class="info-item">
+                <span class="info-label">Category:</span>
+                <span>{{ product.category }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Subcategory:</span>
+                <span>{{ product.subcategory }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Price:</span>
+                <span>RS.{{ product.price }}</span>
+            </div>
+            <div class="info-item">
+                <span class="info-label">Description:</span>
+                <p>{{ product.desc }}</p>
+            </div>
+            
+        </div>
+    </div>
+    <div class="wishlist-container">
+        {% if boolean %}
+            <a href="{% url "remove_from_wishlist" product.id %}">
+                ❤️Remove from wishlist
+            </a>
+        {% else %}
+            <a href="{% url "add_to_wishlist" product.id %}">
+                🤍Add to wishlist
+            </a>
+        {% endif %}
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,36 @@
+{% extends 'base.html' %} 
+{% block title %}reset password{% endblock title %} 
+{% block content %}
+
+<div class="card bg-dark p-5" style="width: 400px; margin: 0 auto;">
+
+  {% for message in messages %}
+
+  <div class="alert alert-{{message.tags}} alert-dismissible fade show" role="alert">
+    <strong>{{message}}</strong>
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+  </div>
+  {% endfor %}
+
+  <h3 class="text-light mb-4">Request a Reset Link</h3>
+
+  <form action="/auth/request-reset-email/" method="post" style="color: #fff; margin-top: 20px;">
+
+    {% csrf_token %}
+    
+    <div class="mb-3">
+      <label for="email" class="form-label" style="color: #fff;">Email</label>
+      <input type="email" class="form-control" id="email" name="email" required style="width: 100%; background-color: #343a40; color: #fff; border: 1px solid #4caf50; padding: 10px; border-radius: 5px;">
+    </div>
+
+    <button type="submit" class="btn btn-success" style="width: 100%;">Submit</button>
+
+    <div class="mt-4 text-center">
+      <a href="/" style="color: #4caf50; text-decoration: none;">Go Back</a>
+    </div>
+  </form>
+</div>
+
+
+
+{% endblock content %}

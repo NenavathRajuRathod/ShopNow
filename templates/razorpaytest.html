@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proceed with Payment</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .payment-container {
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        #rzp-button1 {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 15px 25px;
+            font-size: 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            outline: none;
+        }
+
+        #rzp-button1:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-container">
+        <h1>Securely Complete Your Purchase</h1>
+        <button id="rzp-button1">Pay with Razorpay</button>
+    </div>
+
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+        var options = {
+            "key": "{{ key }}",
+            "name": "Infy Cart",
+            "description": "Paying for Your Order",
+            "order_id": "{{ order_id }}",
+            "callback_url": "http://127.0.0.1:8000/handlerequest/",
+            "image": "{% static "image/logo.jpg" %}",
+            "prefill": {
+                "name": "{{ name }}",
+                "email": "{{ email }}",
+                "contact": "{{ phone }}"
+            },
+            "notes": {
+                "address": "{{ address }}"
+            },
+            "theme": {
+                "color": "#4caf50"
+            },
+            "redirect": true
+        };
+        var rzp1 = new Razorpay(options);
+        document.getElementById('rzp-button1').onclick = function(e){
+            rzp1.open();
+            e.preventDefault();
+        }
+    </script>
+</body>
+</html>
